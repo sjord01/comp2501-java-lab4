@@ -20,10 +20,12 @@ public class BookStore
         if(bookStoreName == null || bookStoreName.isBlank())
         {
             this.bookStoreName = null;
-        } else if(bookStoreName.equalsIgnoreCase("Amazon"))
+        }
+        else if(bookStoreName.equalsIgnoreCase("Amazon"))
         {
             this.bookStoreName = "Chapters";
-        } else
+        }
+        else
         {
             this.bookStoreName = bookStoreName;
         }
@@ -386,17 +388,17 @@ public class BookStore
 
                 try
                 {
-                    System.out.println("---PRINT ALL TITLES---");
+                    System.out.println("----------");
                     bookStore1.printAllTitles();
                 }
-                catch(final Exception e)
+                catch(final IllegalArgumentException e)
                 {
                     System.out.println(e.getMessage());
                 }
 
                 try
                 {
-                    System.out.println("---PRINT TITLES CONTAINING, \"the\", FALSE---");
+                    System.out.println("----------");
                     bookStore1.printTitlesContaining("the", false);
                 }
                 catch(final IllegalArgumentException e)
@@ -406,7 +408,7 @@ public class BookStore
 
                 try
                 {
-                    System.out.println("---PRINT TITLES CONTAINING, \"the\", TRUE---");
+                    System.out.println("----------");
                     bookStore1.printTitlesContaining("the", true);
                 }
                 catch(final IllegalArgumentException e)
@@ -416,7 +418,7 @@ public class BookStore
 
                 try
                 {
-                    System.out.println("---PRINT TITLES OF LENGTH, 13---");
+                    System.out.println("----------");
                     bookStore1.printTitlesOfLength(13);
                 }
                 catch(final Exception e)
