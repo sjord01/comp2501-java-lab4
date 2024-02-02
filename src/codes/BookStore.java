@@ -20,12 +20,10 @@ public class BookStore
         if(bookStoreName == null || bookStoreName.isBlank())
         {
             this.bookStoreName = null;
-        }
-        else if(bookStoreName.equalsIgnoreCase("Amazon"))
+        } else if(bookStoreName.equalsIgnoreCase("Amazon"))
         {
             this.bookStoreName = "Chapters";
-        }
-        else
+        } else
         {
             this.bookStoreName = bookStoreName;
         }
@@ -299,7 +297,8 @@ public class BookStore
             } else if(property.equals("title"))
             {
                 return findLongestTitle();
-            } else
+            }
+            else
             {
                 throw new IllegalNovelPropertyException("bad property");
             }
@@ -372,98 +371,59 @@ public class BookStore
      */
     public static void main(final String[] args)
     {
-        try
+        // Check if command-line arguments are provided
+        if(args.length > 0)
         {
-            // Check if command-line arguments are provided
-            if(args.length > 0)
+            // The first argument is assumed to be the name of the BookStore
+            String bookStoreName = args[0];
+
+            // Create an empty ArrayList<Novel>
+            ArrayList<Novel> novelReferences = new ArrayList<>();
+
+            // Create a BookStore object
+            BookStore bookStore1 = new BookStore(bookStoreName, novelReferences);
+
+            try
             {
-                // The first argument is assumed to be the name of the BookStore
-                String bookStoreName = args[0];
+                //System.out.println("----------");
+               // bookStore1.printAllTitles();
 
-                // Create an empty ArrayList<Novel>
-                ArrayList<Novel> novelReferences = new ArrayList<>();
+                //System.out.println("----------");
+               // bookStore1.printTitlesContaining("the", false);
 
-                // Create a BookStore object
-                BookStore bookStore1 = new BookStore(bookStoreName, novelReferences);
+                //System.out.println("----------");
+                //bookStore1.printTitlesContaining("the", true);
 
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.printAllTitles();
-                }
-                catch(final IllegalArgumentException e)
-                {
-                    System.out.println(e.getMessage());
-                }
+                //System.out.println("----------");
+                //bookStore1.printTitlesOfLength(-4);
 
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.printTitlesContaining("the", false);
-                }
-                catch(final IllegalArgumentException e)
-                {
-                    System.out.println(e.getMessage());
-                }
+                //System.out.println("----------");
+                //bookStore1.printNameStartsEndsWith("aN");
+                bookStore1.printNameStartsEndsWith("aN");
+                bookStore1.printNameStartsEndsWith("");
 
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.printTitlesContaining("the", true);
-                }
-                catch(final IllegalArgumentException e)
-                {
-                    System.out.println(e.getMessage());
-                }
+                //System.out.println("----------");
+                bookStore1.getLongest("xyz");
 
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.printTitlesOfLength(13);
-                }
-                catch(final Exception e)
-                {
-                    System.out.println(e.getMessage());
-                }
-
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.printNameStartsEndsWith("aN");
-                }
-                catch(final IllegalNameException e)
-                {
-                    System.out.println(e.getMessage());
-                }
-
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.getLongest("auThOr");
-                }
-                catch(final Exception e)
-                {
-                    System.out.println(e.getMessage());
-                }
-
-                try
-                {
-                    System.out.println("----------");
-                    bookStore1.getLongest("tItLe");
-                }
-                catch(final IllegalNovelPropertyException e)
-                {
-                    System.out.println(e.getMessage());
-                }
+                System.out.println("----------");
+                bookStore1.getLongest("tItLe");
             }
-            else
+            catch(final IllegalArgumentException e)
             {
-                System.out.println("Please provide the name of the BookStore as a command-line argument.");
+                System.out.println(e.getMessage());
+            }
+            catch(final IllegalNovelPropertyException e)
+            {
+                System.out.println(e.getMessage());
+            }
+            catch(final IllegalNameException e)
+            {
+                System.out.println(e.getMessage());
             }
         }
-        catch(final Exception e)
+        else
         {
-            System.out.println(e.getMessage());
+            System.out.println("Please provide the name of the BookStore as a command-line argument.");
         }
     }
 }
